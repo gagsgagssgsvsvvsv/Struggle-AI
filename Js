@@ -1,0 +1,36 @@
+const chatMessages = document.getElementById("chatMessages");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = "message " + type;
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function sendMessage() {
+  const text = userInput.value.trim();
+
+  if (text === "") return;
+
+  addMessage(text, "user-message");
+
+  userInput.value = "";
+
+  setTimeout(() => {
+    addMessage(
+      "Hello! Main Smart AI Chat hoon. Abhi main demo mode mein hoon.",
+      "ai-message"
+    );
+  }, 600);
+}
+
+sendBtn.addEventListener("click", sendMessage);
+
+userInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
